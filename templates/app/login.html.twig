@@ -1,0 +1,56 @@
+{% extends '@layout/auth.html.twig' %}
+
+{% block content %}
+    {% set email = form.get('email') %}
+    {% do email.setAttribute('class','form-control').setAttribute('required','required') %}
+
+    {% set password = form.get('password') %}
+    {% do password.setAttribute('class','form-control').setAttribute('required','required') %}
+
+    {% set submit = form.get('submit') %}
+    {% do submit.setAttribute('class','btn btn-warning').setLabel('Entrar') %}
+
+    {% do form.setAttribute('action',url('auth.login')) %}
+    {% do form.prepare() %}
+    <div class="row">
+        <div class="col-xs-12 col-md-3"></div>
+        <div class="col-xs-12 col-md-6">
+            <div class="box box-warning">
+                {{ form().openTag(form) | raw }}
+                <div class="box box-header">
+                    <h3>Formulário de Login</h3>
+                </div>
+                <div class="box-body">
+
+                    {% set message = formElementErrors(email,{class: 'help-block'}) %}
+                    {#operação ternária, se a mensagem existe coloca a classe has-error, se não naõ coloca nada#}
+                    <div class="form-group {{ message ? 'has-error' }}">
+                        {{ formLabel(email) }}
+                        {{ formElement(email) }}
+                        {{ message | raw }}
+                    </div>
+
+                    {% set message = formElementErrors(password,{class: 'help-block'}) %}
+                    {#operação ternária, se a mensagem existe coloca a classe has-error, se não naõ coloca nada#}
+                    <div class="form-group {{ message ? 'has-error' }}">
+                        {{ formLabel(password) }}
+                        {{ formElement(password) }}
+                        {{ message | raw }}
+                    </div>
+
+                </div>
+                <div class="box-footer">
+                    {{ formButton(submit) }}
+                </div>
+                {{ form().closeTag() | raw }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3"></div>
+    </div>
+{% endblock %}
+{% block title %}
+    Pagina de autenticação
+{% endblock %}
+{% block page_header %}
+   Autenticação
+{% endblock %}

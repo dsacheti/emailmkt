@@ -1,0 +1,22 @@
+#EmailMkt.Domain.Entity.Customer.dcm.yml
+EmailMkt\Domain\Entity\Customer:
+  type: entity
+  repositoryClass: EmailMkt\Infrastructure\Persistence\Doctrine\Repository\CustomerRepository
+  table: customers
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 100
+      nullable: true
+    email:
+      type: string
+      length: 120
+  manyToMany:
+    tags:
+     targetEntity: EmailMkt\Domain\Entity\Tag
+     mappedBy: customers

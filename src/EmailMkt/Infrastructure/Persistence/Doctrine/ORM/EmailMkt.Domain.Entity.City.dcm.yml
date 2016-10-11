@@ -1,0 +1,22 @@
+#EmailMkt.Domain.Entity.City.dcm.yml
+EmailMkt\Domain\Entity\City:
+  type: entity
+  repositoryClass: EmailMkt\Infrastructure\Persistence\Doctrine\Repository\CityRepository
+  table: cities
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 100
+    uf:
+      type: string
+      length: 2
+    cep:
+      type: string
+      length: 9
+      nullable: true
+

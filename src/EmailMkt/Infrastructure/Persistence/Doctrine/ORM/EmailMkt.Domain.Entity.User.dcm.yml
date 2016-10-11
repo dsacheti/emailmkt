@@ -1,0 +1,24 @@
+#EmailMkt.Domain.Entity.User.dcm.yml
+EmailMkt\Domain\Entity\User:
+  type: entity
+  #repositoryClass: EmailMkt\Infrastructure\Persistence\Doctrine\Repository\CustomerRepository
+  table: users
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 100
+      nullable: true
+    email:
+      type: string
+      unique: true
+      length: 120
+    password:
+      type: string
+      legth: 60
+  lifecycleCallbacks:
+    prePersist: [generatePassword]
