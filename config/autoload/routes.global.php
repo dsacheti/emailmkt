@@ -3,14 +3,21 @@ use EmailMkt\Application\Action\Customer\{
     CustomerListPageAction,CustomerCreatePageAction,CustomerUpdatePageAction,CustomerDeletePageAction
 };
 use EmailMkt\Application\Action\Customer\Factory as Customer;
+
 use EmailMkt\Application\Action\City\{
     CityCreatePageAction,CityListPageAction,CityUpdatePageAction,CityDeletePageAction
 };
 use EmailMkt\Application\Action\City\Factory as City;
+
 use EmailMkt\Application\Action\{
     PingAction,TestePageAction,HomePageAction,LoginPageAction,LogoutAction,Teste2PageAction,
     HomePageFactory,Teste2PageFactory,LoginPageFactory,LogoutFactory
 };
+use EmailMkt\Application\Action\Tag\{
+    TagListPageAction
+};
+use EmailMkt\Application\Action\Tag\Factory as Tag;
+
 
 return [
     'dependencies' => [
@@ -34,6 +41,11 @@ return [
             CityListPageAction::class => City\CityListPageFactory::class,
             CityUpdatePageAction::class => City\CityUpdatePageFactory::class,
             CityDeletePageAction::class => City\CityDeletePageFactory::class,
+            //Tag
+            TagListPageAction::class => Tag\TagListPageFactory::class,
+            //TagCreatePageAction::class =>Tag\TagCreatePageFactory::class,
+            //TagUpdatePageAction::class => Tag\TagUpdatePageFactory::class,
+            //TagDeletePageAction::class => Tag\TagDeletePageFactory::class
 
 
          ],
@@ -87,11 +99,27 @@ return [
         ],
         [
             //o nome é importante para acoplar ao nome não à url
+            'name' => 'tag.list',
+            'path' => '/admin/tags',
+            'middleware' => TagListPageAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            //o nome é importante para acoplar ao nome não à url
             'name' => 'customer.create',
             'path' => '/admin/customer/create',
             'middleware' => CustomerCreatePageAction::class,
             'allowed_methods' => ['GET','POST']
         ],
+
+//        [
+//            //o nome é importante para acoplar ao nome não à url
+//            'name' => 'tag.create',
+//            'path' => '/admin/tag/create',
+//            'middleware' => TagCreatePageAction::class,
+//            'allowed_methods' => ['GET','POST']
+//        ],
+
         [
             'name' => 'customer.update',
             'path' => '/admin/customer/update/{id}',
@@ -103,6 +131,19 @@ return [
                 ]
             ]
         ],
+
+//        [
+//            'name' => 'tag.update',
+//            'path' => '/admin/tag/update/{id}',
+//            'middleware' => TagUpdatePageAction::class,
+//            'allowed_methods' => ['GET','POST'],
+//            'options' => [
+//                'tokens' => [
+//                    'id' => '\d+'
+//                ]
+//            ]
+//        ],
+
         [
             'name' => 'customer.delete',
             'path' => '/admin/customer/delete/{id}',
@@ -114,6 +155,19 @@ return [
                 ]
             ]
         ],
+
+//        [
+//            'name' => 'tag.delete',
+//            'path' => '/admin/tag/delete/{id}',
+//            'middleware' => TagDeletePageAction::class,
+//            'allowed_methods' => ['GET','POST'],
+//            'options' => [
+//                'tokens' => [
+//                    'id' => '\d+'
+//                ]
+//            ]
+//        ],
+
         [
             //o nome é importante para acoplar ao nome não à url
         'name' => 'city.create',

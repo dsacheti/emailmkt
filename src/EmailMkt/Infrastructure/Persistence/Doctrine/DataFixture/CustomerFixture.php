@@ -20,13 +20,13 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface, Order
     public function load(ObjectManager $manager)
     {
         $faker = Faker::create();
-        foreach (range(1,100) as $key =>$value){
+        foreach (range(1,100) as $index =>$value){
             $customer = new Customer();
             $customer->setName($faker->name);
             $customer->setEmail($faker->email);
             $manager->persist($customer);
             //para o container
-            $this->addReference("Customer - $key",$customer);
+            $this->addReference("customer-$index",$customer);
         }
 
         $manager->flush();

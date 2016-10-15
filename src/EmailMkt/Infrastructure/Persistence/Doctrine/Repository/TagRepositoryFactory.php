@@ -3,18 +3,20 @@
 namespace EmailMkt\Infrastructure\Persistence\Doctrine\Repository;
 
 use Doctrine\ORM\EntityManager;
-use EmailMkt\Domain\Entity\Customer;
+use EmailMkt\Domain\Entity\Tag;
 use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class CustomerRepositoryFactory
+class TagRepositoryFactory
 {
-    public function __invoke(ContainerInterface $container):CustomerRepository
+
+    public function __invoke(ContainerInterface $container):TagRepository
     {
         /**
          * @var EntityManager $entityManager
          */
         $entityManager = $container->get(EntityManager::class);
-        return $entityManager->getRepository(Customer::class);
+        return $entityManager->getRepository(Tag::class);
     }
 
 

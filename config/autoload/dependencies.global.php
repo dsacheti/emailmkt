@@ -1,14 +1,16 @@
 <?php
-use EmailMkt\Domain\Persistence\CityRepositoryInterface;
+use EmailMkt\Domain\Persistence\{
+    CityRepositoryInterface,CustomerRepositoryInterface,TagRepositoryInterface
+};
 use EmailMkt\Domain\Service\FlashMessageInterface;
-use EmailMkt\Infrastructure\Persistence\Doctrine\Repository\CityRepositoryFactory;
 use EmailMkt\Infrastructure\Service;
 use Zend\Expressive\Application;
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
-use EmailMkt\Domain\Persistence\CustomerRepositoryInterface;
-use EmailMkt\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory;
-use EmailMkt\Application\Form;
+use EmailMkt\Infrastructure\Persistence\Doctrine\Repository\{
+    CustomerRepositoryFactory,CityRepositoryFactory,TagRepositoryFactory
+};
+
 
 return [
     // Provides application-wide services.
@@ -27,6 +29,7 @@ return [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
+            TagRepositoryInterface::class => TagRepositoryFactory::class,
             FlashMessageInterface::class => Service\FlashMessageFactory::class,
             CityRepositoryInterface::class => CityRepositoryFactory::class,
             'doctrine:fixtures_cmd:load'   => \CodeEdu\FixtureFactory::class,
