@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #EmailMkt.Domain.Entity.Tag.dcm.yml
 EmailMkt\Domain\Entity\Tag:
   type: entity
@@ -12,7 +13,7 @@ EmailMkt\Domain\Entity\Tag:
     nome:
       type: string
       length: 200
-  manyToMany:
+ manyToMany:
     customers:
       targetEntity: EmailMkt\Domain\Entity\Customer
       inversedBy: tags
