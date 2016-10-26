@@ -1,0 +1,23 @@
+#EmailMkt.Domain.Entity.Campaign.dcm.yml
+EmailMkt\Domain\Entity\Campaign:
+  type: entity
+  repositoryClass: EmailMkt\Infrastructure\Persistence\Doctrine\Repository\CampaignRepository
+  table: campaigns
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 100
+    subject:
+      type: string
+      length: 100
+    template:
+      type: text
+  manyToMany:
+    tags:
+      targetEntity: EmailMkt\Domain\Entity\Tag
+      mappedBy: campaigns

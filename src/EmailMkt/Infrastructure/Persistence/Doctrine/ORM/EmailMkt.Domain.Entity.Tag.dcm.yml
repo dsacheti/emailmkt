@@ -1,18 +1,21 @@
 #EmailMkt.Domain.Entity.Tag.dcm.yml
 EmailMkt\Domain\Entity\Tag:
- type: entity
- repositoyClass: EmailMkt\Infrastructure\Persistence\Doctrine\Repository\TagRepository
- table: tags
- id:
+  type: entity
+  repositoryClass: EmailMkt\Infrastructure\Persistence\Doctrine\Repository\TagRepository
+  table: tags
   id:
-    type: integer
-    generator:
-      strategy: AUTO
- fields:
-  nome:
-   type: string
-   length: 200
- manyToMany:
-  customers:
-   targetEntity: EmailMkt\Domain\Entity\Customer
-   inversedBy: tags
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    nome:
+      type: string
+      length: 200
+  manyToMany:
+    customers:
+      targetEntity: EmailMkt\Domain\Entity\Customer
+      inversedBy: tags
+    campaigns:
+      targetEntity: EmailMkt\Domain\Entity\Campaign
+      inversedBy: tags

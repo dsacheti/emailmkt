@@ -17,5 +17,4 @@ class CustomerRepositoryFactory
         return $entityManager->getRepository(Customer::class);
     }
 
-
 }

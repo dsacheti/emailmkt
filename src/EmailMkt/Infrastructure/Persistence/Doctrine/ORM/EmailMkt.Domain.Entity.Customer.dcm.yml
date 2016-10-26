@@ -18,5 +18,5 @@ EmailMkt\Domain\Entity\Customer:
       length: 120
   manyToMany:
     tags:
-     targetEntity: EmailMkt\Domain\Entity\Tag
-     mappedBy: customers
+      targetEntity: EmailMkt\Domain\Entity\Tag
+      mappedBy: customers

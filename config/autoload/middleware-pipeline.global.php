@@ -4,10 +4,11 @@ use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
 use EmailMkt\Application\Middleware;
 use EmailMkt\Application\Form\{
-    CityForm,CustomerForm,LoginForm,TagForm
+    CityForm,CustomerForm,LoginForm,TagForm,CampaignForm
+
 };
 use EmailMkt\Application\Form\Factory\{
-    CityFormFactory,CustomerFormFactory,LoginFormFactory,TagFormFactory
+    CityFormFactory,CustomerFormFactory,LoginFormFactory,TagFormFactory,CampaignFormFactory
 };
 
 
@@ -25,7 +26,8 @@ return [
             CustomerForm::class => CustomerFormFactory::class,
             CityForm::class => CityFormFactory::class,
             LoginForm::class => LoginFormFactory::class,
-            TagForm::class => TagFormFactory::class
+            TagForm::class => TagFormFactory::class,
+            CampaignForm::class => CampaignFormFactory::class
 
 
         ],

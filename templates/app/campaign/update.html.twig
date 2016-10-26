@@ -1,0 +1,53 @@
+{% extends '@layout/default.html.twig' %}
+{% block content %}
+    {% include '@app/campaign/_elementos_formulario.html.twig' %}
+
+    {% set submit = form.get('submit') %}
+    {% do
+    submit.setAttribute('class','btn btn-info')
+    .setLabel('Confirmar')
+    %}
+    {% do form.setAttribute('action',url('campaign.update')) %}
+    {% do form.prepare() %}
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <div class="box box-info">
+                <div class="box-body">
+                    {{ form().openTag(form) | raw }}
+
+                    {% include '@app/campaign/_campos_comuns.html.twig' %}
+
+                    <div class="box-footer">
+                        {{ formButton(submit) }}
+                        <a class="btn btn-default" href="{{ url('campaign.list') }}">Cancelar</a>
+                    </div>
+
+                    {{ form().closeTag() |raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        tinymce.init({
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern imagetools'
+            ],
+            toolbar1: 'bold italic | fontselect |  fontsizeselect | print preview media | forecolor backcolor emoticons',
+            toolbar2: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            selector:'textarea',
+            skin: 'custom',
+            height: 200
+        });
+    </script>
+{% endblock %}
+{% block title %}
+    Modificar Campanha
+{% endblock %}
+{% block page_header %}
+    Modificar Campanha - {{form.getObject.name }}
+{% endblock %}

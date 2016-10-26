@@ -1,8 +1,6 @@
 <?php
-declare(strict_types=1);
 
 namespace EmailMkt\Domain\Entity;
-
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,9 +13,15 @@ class Tag
 
     private $customers;
 
+    private $campaigns;
+
+    /**
+     * Tag constructor.
+     */
     public function __construct()
     {
         $this->customers = new ArrayCollection();
+        $this->campaigns = new ArrayCollection();
     }
 
     /**
@@ -39,13 +43,19 @@ class Tag
     /**
      * @param mixed $nome
      */
-    public function setNome(string $nome)
+    public function setNome($nome)
     {
         $this->nome = $nome;
     }
 
-    public function getCustomers(): Collection
+    public function getCustomers():Collection
     {
         return $this->customers;
+    }
+
+
+    public function getCampaigns():Collection
+    {
+        return $this->campaigns;
     }
 }

@@ -20,10 +20,11 @@ class TagFixture extends AbstractFixture implements  FixtureInterface, OrderedFi
     {
 
         $faker = Faker::create();
-        foreach (range(1,100) as $key => $value){
+        foreach (range(1,20) as $key => $value){
             $tag = new Tag();
             $tag->setNome($faker->city);
             $this->addCustomers($tag);
+            $this->addCampaigns($tag);
             $manager->persist($tag);
         }
 
@@ -32,22 +33,26 @@ class TagFixture extends AbstractFixture implements  FixtureInterface, OrderedFi
 
     public function addCustomers(Tag $tag)
     {
-        $numCustomers = rand(1,5);
-        foreach (range(0,$numCustomers) as $value) {
-            //índice do customer:
-            $index = rand(0,99);
-            $customer = $this->getReference("customer-$index");
+        $indexesCustomers = array_rand(range(0,4),rand(2,5));
+        foreach ($indexesCustomers as $value) {
+            $customer = $this->getReference("customer-$value");
 
-           // estrutura para diminuir a chance de pegar um customer repetido
-            if ($tag->getCustomers()->exists(function($key,$item) use($customer){
-                return ($customer->getId() == $item->getId());
-            })){
-                $index = rand(0,99);
-                $customer = $this->getReference("customer-$index");
-            }
             $tag->getCustomers()->add($customer);
         }
     }
+
+    public function addCampaigns(Tag $tag)
+    {
+        $indexesCampaigns = array_rand(range(0,19),rand(2,5));
+        foreach ($indexesCampaigns as $value) {
+            $campaign = $this->getReference("campaign-$value");
+            if ($campaign->getTags()->count() < 2) {
+                $campaign->getTags()->add($tag);
+                $tag->getCampaigns()->add($campaign);
+            }
+    }
+    }
+
 
     /**
      * Get the order of this fixture

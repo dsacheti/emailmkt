@@ -19,11 +19,11 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface, Order
      */
     public function load(ObjectManager $manager)
     {
-        $faker = Faker::create();
-        foreach (range(1,100) as $index =>$value){
+        //$faker = Faker::create();
+        foreach ($this->getData() as $index =>$value){
             $customer = new Customer();
-            $customer->setName($faker->name);
-            $customer->setEmail($faker->email);
+            $customer->setName($value['name']);
+            $customer->setEmail($value['email']);
             $manager->persist($customer);
             //para o container
             $this->addReference("customer-$index",$customer);
@@ -43,5 +43,16 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface, Order
     public function getOrder(): int
     {
         return 100;
+    }
+
+    public function getData()
+    {
+        return [
+            ['name' => 'Dsnei','email' =>'dalcinei@gmail.com'],
+            ['name' => 'Dsnei1','email' =>'dalci_sacheti@hotmail.com'],
+            ['name' => 'Dsnei2','email' =>'nacenei@yahoo.com.br'],
+            ['name' => 'Dsnei3','email' =>'R.VICRO@yahoo.com.br'],
+            ['name' => 'Dsnei4','email' =>'dalcinei.sacheti@gmail.com']
+        ];
     }
 }

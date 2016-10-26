@@ -1,16 +1,23 @@
 <?php
+//essa maneira com chaves só pode ser usada no php7
 use EmailMkt\Domain\Persistence\{
-    CityRepositoryInterface,CustomerRepositoryInterface,TagRepositoryInterface
+    CityRepositoryInterface,CustomerRepositoryInterface,TagRepositoryInterface,
+    CampaignRepositoryInterface
 };
-use EmailMkt\Domain\Service\FlashMessageInterface;
-use EmailMkt\Infrastructure\Service;
+use EmailMkt\Domain\Service\{
+    AuthInterface,FlashMessageInterface,CampaignEmailSenderInterface
+};
+use EmailMkt\Infrastructure\Service\{
+    MailgunFactory, AuthServiceFactory,FlashMessageFactory,CampaignEmailSenderFactory
+};
+use Mailgun\Mailgun;
 use Zend\Expressive\Application;
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
 use EmailMkt\Infrastructure\Persistence\Doctrine\Repository\{
-    CustomerRepositoryFactory,CityRepositoryFactory,TagRepositoryFactory
+    CustomerRepositoryFactory,CityRepositoryFactory,TagRepositoryFactory,
+    CampaignRepositoryFactory
 };
-
 
 return [
     // Provides application-wide services.
@@ -29,11 +36,14 @@ return [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
-            TagRepositoryInterface::class => TagRepositoryFactory::class,
-            FlashMessageInterface::class => Service\FlashMessageFactory::class,
+            FlashMessageInterface::class => FlashMessageFactory::class,
             CityRepositoryInterface::class => CityRepositoryFactory::class,
+            TagRepositoryInterface::class => TagRepositoryFactory::class,
+            CampaignRepositoryInterface::class => CampaignRepositoryFactory::class,
             'doctrine:fixtures_cmd:load'   => \CodeEdu\FixtureFactory::class,
-            \EmailMkt\Domain\Service\AuthInterface::class => Service\AuthServiceFactory::class
+            AuthInterface::class => AuthServiceFactory::class,
+            CampaignEmailSenderInterface::class => CampaignEmailSenderFactory::class,
+            Mailgun::class => MailgunFactory::class
         ],
         'aliases' => [
             'Configuration' => 'config', //Doctrine needs a service called Configuration

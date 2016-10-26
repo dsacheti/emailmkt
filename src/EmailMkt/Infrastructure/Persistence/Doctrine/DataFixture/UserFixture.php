@@ -18,11 +18,11 @@ class UserFixture implements FixtureInterface,OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         //administrador
-//        $user = new User();
-//        $user->setName('Admin');
-//        $user->setEmail('ad@min.com.br');
-//        $user->setPlainPassword(12345);
-//        $manager->persist($user);
+        $user = new User();
+        $user->setName('Admin');
+        $user->setEmail('ad@min.com.br');
+        $user->setPlainPassword(12345);
+        $manager->persist($user);
         //outros usuários para teste
         $faker = Faker::create();
         foreach (range(1,10) as $value){

@@ -5,7 +5,6 @@ namespace EmailMkt\Infrastructure\Persistence\Doctrine\Repository;
 use Doctrine\ORM\EntityManager;
 use EmailMkt\Domain\Entity\City;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class CityRepositoryFactory

@@ -18,13 +18,13 @@ class TagForm extends Form
             'type' => Element\Hidden::class
         ]);
         $this->add([
-            'name' => 'name',
+            'name' => 'nome',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Nome:'
             ],
             'attributes' => [
-                'id' => 'name'
+                'id' => 'nome'
             ]
         ]);
         $this->add([

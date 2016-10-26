@@ -14,10 +14,14 @@ use EmailMkt\Application\Action\{
     HomePageFactory,Teste2PageFactory,LoginPageFactory,LogoutFactory
 };
 use EmailMkt\Application\Action\Tag\{
-    TagListPageAction
+    TagListPageAction,TagCreatePageAction,TagUpdatePageAction,TagDeletePageAction
 };
 use EmailMkt\Application\Action\Tag\Factory as Tag;
-
+use EmailMkt\Application\Action\Campaign\{
+    CampaignCreatePageAction,CampaignListPageAction,CampaignUpdatePageAction,
+    CampaignDeletePageAction,CampaignSenderPageAction
+};
+use EmailMkt\Application\Action\Campaign\Factory as Campaign;
 
 return [
     'dependencies' => [
@@ -43,11 +47,15 @@ return [
             CityDeletePageAction::class => City\CityDeletePageFactory::class,
             //Tag
             TagListPageAction::class => Tag\TagListPageFactory::class,
-            //TagCreatePageAction::class =>Tag\TagCreatePageFactory::class,
-            //TagUpdatePageAction::class => Tag\TagUpdatePageFactory::class,
-            //TagDeletePageAction::class => Tag\TagDeletePageFactory::class
-
-
+            TagCreatePageAction::class =>Tag\TagCreatePageFactory::class,
+            TagUpdatePageAction::class => Tag\TagUpdatePageFactory::class,
+            TagDeletePageAction::class => Tag\TagDeletePageFactory::class,
+            //Campaign
+            CampaignCreatePageAction::class => Campaign\CampaignCreatePageFactory::class,
+            CampaignListPageAction::class => Campaign\CampaignListPageFactory::class,
+            CampaignUpdatePageAction::class => Campaign\CampaignUpdatePageFactory::class,
+            CampaignDeletePageAction::class => Campaign\CampaignDeletePageFactory::class,
+            CampaignSenderPageAction::class => Campaign\CampaignSenderPageFactory::class
          ],
     ],
 
@@ -112,13 +120,13 @@ return [
             'allowed_methods' => ['GET','POST']
         ],
 
-//        [
-//            //o nome é importante para acoplar ao nome não à url
-//            'name' => 'tag.create',
-//            'path' => '/admin/tag/create',
-//            'middleware' => TagCreatePageAction::class,
-//            'allowed_methods' => ['GET','POST']
-//        ],
+        [
+            //o nome é importante para acoplar ao nome não à url
+            'name' => 'tag.create',
+            'path' => '/admin/tag/create',
+            'middleware' => TagCreatePageAction::class,
+            'allowed_methods' => ['GET','POST']
+        ],
 
         [
             'name' => 'customer.update',
@@ -132,17 +140,17 @@ return [
             ]
         ],
 
-//        [
-//            'name' => 'tag.update',
-//            'path' => '/admin/tag/update/{id}',
-//            'middleware' => TagUpdatePageAction::class,
-//            'allowed_methods' => ['GET','POST'],
-//            'options' => [
-//                'tokens' => [
-//                    'id' => '\d+'
-//                ]
-//            ]
-//        ],
+        [
+            'name' => 'tag.update',
+            'path' => '/admin/tag/update/{id}',
+            'middleware' => TagUpdatePageAction::class,
+            'allowed_methods' => ['GET','POST'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
 
         [
             'name' => 'customer.delete',
@@ -156,24 +164,70 @@ return [
             ]
         ],
 
-//        [
-//            'name' => 'tag.delete',
-//            'path' => '/admin/tag/delete/{id}',
-//            'middleware' => TagDeletePageAction::class,
-//            'allowed_methods' => ['GET','POST'],
-//            'options' => [
-//                'tokens' => [
-//                    'id' => '\d+'
-//                ]
-//            ]
-//        ],
-
+        [
+            'name' => 'tag.delete',
+            'path' => '/admin/tag/delete/{id}',
+            'middleware' => TagDeletePageAction::class,
+            'allowed_methods' => ['GET','POST'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
         [
             //o nome é importante para acoplar ao nome não à url
-        'name' => 'city.create',
-        'path' => '/admin/city/create',
-        'middleware' => CityCreatePageAction::class,
+        'name' => 'campaign.create',
+        'path' => '/admin/campaign/create',
+        'middleware' => CampaignCreatePageAction::class,
         'allowed_methods' => ['GET','POST']
+        ],
+        [
+            //o nome é importante para acoplar ao nome não à url
+            'name' => 'campaign.list',
+            'path' => '/admin/campaigns',
+            'middleware' => CampaignListPageAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'campaign.update',
+            'path' => '/admin/campaign/update/{id}',
+            'middleware' => CampaignUpdatePageAction::class,
+            'allowed_methods' => ['GET','POST'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
+        [
+            'name' => 'campaign.delete',
+            'path' => '/admin/campaign/delete/{id}',
+            'middleware' => CampaignDeletePageAction::class,
+            'allowed_methods' => ['GET','POST'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
+        [
+            'name' => 'campaign.sender',
+            'path' => '/admin/campaign/sender/{id}',
+            'middleware' => CampaignSenderPageAction::class,
+            'allowed_methods' => ['GET','POST'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
+        [
+            //o nome é importante para acoplar ao nome não à url
+            'name' => 'city.create',
+            'path' => '/admin/city/create',
+            'middleware' => CityCreatePageAction::class,
+            'allowed_methods' => ['GET','POST']
         ],
         [
             //o nome é importante para acoplar ao nome não à url
@@ -203,6 +257,7 @@ return [
                     'id' => '\d+'
                 ]
             ]
-        ]
+        ],
+
     ],
 ];

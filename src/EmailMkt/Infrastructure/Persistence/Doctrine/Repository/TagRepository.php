@@ -11,14 +11,14 @@ use EmailMkt\Domain\Persistence\TagRepositoryInterface;
 class TagRepository extends EntityRepository implements TagRepositoryInterface
 {
 
-    public function create($entity):Tag
+    public function create($entity): Tag
     {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
         return $entity;
     }
 
-    public function update($entity):Tag
+    public function update($entity): Tag
     {
         if ($this->getEntityManager()->getUnitOfWork()->getEntityState($entity) !=UnitOfWork::STATE_MANAGED) {
             $this->getEntityManager()->merge($entity);
@@ -34,14 +34,14 @@ class TagRepository extends EntityRepository implements TagRepositoryInterface
         $this->getEntityManager()->flush();
     }
 
-    public function find($id):Tag
+    public function find($id): Tag
     {
         //acessando o EntityRepository que faz o trabalho
         return parent::find($id);
     }
 
-    public function findAll()
+    public function findAll(): array
     {
-        return parent::findAll();
+       return parent::findAll();
     }
 }

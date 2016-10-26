@@ -20,7 +20,7 @@
                         {% for tag in tags %}
                             <tr>
                                 <td>{{ tag.id }}</td>
-                                <td>{{ tag.name }}</td>
+                                <td>{{ tag.nome }}</td>
                                 <td>
                                     <a href="{{ url('tag.update',{id:tag.id}) }}">Editar</a> |
                                     <a href="{{ url('tag.delete',{id:tag.id}) }}">Apagar</a>

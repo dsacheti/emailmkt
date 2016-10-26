@@ -1,13 +1,13 @@
 {% extends '@layout/default.html.twig' %}
 {% block content %}
-    {% include '@app/customer/_elementos_formulario.html.twig' %}
+    {% include '@app/tag/_elementos_formulario.html.twig' %}
 
     {% set submit = form.get('submit') %}
     {% do
     submit.setAttribute('class','btn btn-info')
     .setLabel('Salvar')
     %}
-    {% do form.setAttribute('action',url('customer.update',{id:form.getObject.id})) %}
+    {% do form.setAttribute('action',url('tag.update',{id:form.getObject.id})) %}
     {% do form.prepare() %}
     <div class="row">
         <div class="col-xs-12 col-md-8">
@@ -15,11 +15,11 @@
                 <div class="box-body">
                     {{ form().openTag(form) |raw }}
 
-                    {% include '@app/customer/_campos_comuns.html.twig' %}
+                    {% include '@app/tag/_campos_comuns.html.twig' %}
 
                     <div class="box-footer">
                         {{ formButton(submit) }}
-                        <a class="btn btn-default" href="{{ url('customer.list') }}">Cancelar</a>
+                        <a class="btn btn-default" href="{{ url('tag.list') }}">Cancelar</a>
                     </div>
 
                     {{ form().closeTag() |raw }}
@@ -30,8 +30,8 @@
 {% endblock %}
 
 {% block title %}
-    Atualizar Contato
+    Atualizar Tag
 {% endblock %}
 {% block page_header %}
-    Atualizar Contato - {{ form.getObject.name }}
+    Atualizar Tag - {{ form.getObject.nome }}
 {% endblock %}

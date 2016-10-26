@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace EmailMkt\Domain\Entity;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -19,13 +18,11 @@ class Customer
 
     /**
      * Customer constructor.
-     * @param $tags
      */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
     }
-
 
     /**
      * @return mixed
@@ -70,6 +67,30 @@ class Customer
     public function getTags(): Collection
     {
         return $this->tags;
+    }
+
+    public function addTags(Collection $tags)
+    {
+        /** @var Tag $tag */
+        foreach ($tags as $tag) {
+            $tag->getCustomers()->add($this);//adiciona customer na tag
+            //remove tag do customer - tags foi inicializada como uma Collection
+            //e a Collection tem um método add
+            $this->tags->add($tag);
+        }
+        return $this;
+    }
+
+    public function removeTags(Collection $tags)
+    {
+        /** @var Tag $tag */
+        foreach ($tags as $tag) {
+            $tag->getCustomers()->removeElement($this);//remove customer da tag
+            //remove tag do customer - tags foi inicializada como uma Collection
+            //e a Collection tem um método add
+            $this->tags->removeElement($tag);
+        }
+        return $this;
     }
 
 }

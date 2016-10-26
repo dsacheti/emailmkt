@@ -1,14 +1,12 @@
-{% set email = form.get('email') %}
+{% set nome = form.get('nome') %}
 <div class="box-body">
-    <div class="form-group">
-        {# formRow é usado para mostrar label + elementos + mensagens #}
-        {{ formRow(form.get('name')) }}
-    </div>
-    {% set message = formElementErrors(email,{class: 'help-block'}) %}
-    {#operação ternária, se a mensagem existe coloca a classe has-error, se não naõ coloca nada#}
-    <div class="form-group {{ message ? 'has-error' }}">
-        {{ formLabel(email) }}
-        {{ formElement(email) }}
+    {% set message = formElementErrors(nome,{class: 'help-block'}) %}
+    <div class="form-group{{ message ? 'has-error' }}">
+        {{ formLabel(nome) }}
+        {{ formElement(nome) }}
         {{ message | raw }}
     </div>
+
 </div>
+
+

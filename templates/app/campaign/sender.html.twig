@@ -1,0 +1,65 @@
+{% extends '@layout/default.html.twig' %}
+{% set name = form.get('name') %}
+{% do name.setAttribute('disabled','disabled') %}
+{% set subject = form.get('subject') %}
+{% do subject.setAttribute('disabled','disabled') %}
+{% set tags = form.get('tags') %}
+{% set template = form.get('template') %}
+{% do tags.setAttribute('disabled','disabled') %}
+{#não precisa desabilitar o template, o tinymce vai fazer de forma mais eficaz#}
+{% block content %}
+    {% include '@app/campaign/_elementos_formulario.html.twig' %}
+
+    {% set submit = form.get('submit') %}
+    {% do
+    submit.setAttribute('class','btn btn-info')
+    .setLabel('Enviar')
+    %}
+    {% do form.setAttribute('action',url('campaign.sender')) %}
+    {% do form.prepare() %}
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <div class="box box-comment">
+                <div class="box-body">
+                    {{ form().openTag(form) | raw }}
+
+                    <div class="form-group">
+                        {{ formRow(name) }}
+                    </div>
+                    <div class="form-group">
+                        {{ formRow(subject) }}
+                    </div>
+                    <div class="form-group">
+                        {{ formRow(tags) }}
+                    </div>
+                    <div class="form-group">
+                        {{ formRow(template) }}
+                    </div>
+
+                    <div class="box-footer">
+                        {{ formButton(submit) }}
+                        <a class="btn btn-default" href="{{ url('campaign.list') }}">Cancelar</a>
+                    </div>
+
+                    {{ form().closeTag() |raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        tinymce.init({
+            selector:'textarea',
+            skin: 'custom',
+            height: 200,
+            readonly: 1
+        });
+    </script>
+{% endblock %}
+{% block title %}
+    Envio de Campanha
+{% endblock %}
+{% block page_header %}
+    Envio da Campanha - {{form.getObject.name }}
+{% endblock %}
