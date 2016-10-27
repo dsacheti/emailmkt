@@ -64,7 +64,8 @@ class CampaignEmailSender implements CampaignEmailSenderInterface
         //pode lançar até 3 campanhas no mesmo BatchMessage - no máximo
         $batchMessage->addCampaignId("envio-{$this->campaign->getId()}");
         //quem envia - segundo parametro como array pode ser full_name,first_name,last_name
-        $batchMessage->setFromAddress("nacenei@yahoo.com.br",['full_name'=> 'Dalcinei Sacheti']);
+        //lembrar que o email que envia não pode receber porque dá erro
+        $batchMessage->setFromAddress("dsacheti@outlook.com",['full_name'=> 'Dalcinei Sacheti']);
         $batchMessage->setSubject($this->campaign->getSubject());
         //para usar o template é preciso usar o setHtmlBody
         $batchMessage->setHtmlBody($this->getHtmlBody());
